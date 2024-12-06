@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import { NAVBAR_LINKS } from "../../utils/links";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { AiOutlineClose } from "react-icons/ai";
+
 import { FaUser } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 
@@ -9,7 +11,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <nav>
+      <nav className="z-10 relative top-0 left-0 w-full">
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
           <div className="text-2xl flex items-center font-bold py-5">
@@ -39,8 +41,11 @@ const Navbar = () => {
             </div>
           </div>
           {/* Mobile hamburger menu */}
-          <div className="block md:hidden" onClick={() => setOpen(!open)}>
-            <RxHamburgerMenu />
+          <div
+            className="block md:hidden text-4xl font-bold cursor-pointer"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <AiOutlineClose /> : <RxHamburgerMenu />}
           </div>
         </div>
       </nav>
