@@ -2,6 +2,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 
 import User from "../models/userModel.js";
+import verifyToken from "../middleware/verifyToken.js";
 const userRoute = express.Router();
 
 // @desc Register User
@@ -62,6 +63,13 @@ userRoute.post("/login", async (req, res, next) => {
       expiresIn: "30d",
     });
 
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
+
     return res.status(200).json({
       message: "Login successful",
       token,
@@ -75,6 +83,10 @@ userRoute.post("/login", async (req, res, next) => {
     console.error(error.message);
     next(error);
   }
+});
+
+userRoute.get("/protected", verifyToken, (req, res) => {
+  res.status(200).json({ message: "This is a protected route" });
 });
 
 export default userRoute;
