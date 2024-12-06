@@ -5,11 +5,13 @@ import connectDB from "./config/db.js";
 import errorHandler from "./middleware/errorHandler.js";
 import userRoute from "./controllers/userController.js";
 import verifyToken from "./middleware/verifyToken.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 connectDB();
 

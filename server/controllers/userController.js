@@ -85,6 +85,22 @@ userRoute.post("/login", async (req, res, next) => {
   }
 });
 
+userRoute.post("/logout", (req, res, next) => {
+  try {
+    res.cookie("jwt", "", {
+      httpOnly: true,
+      secure: process.env.JWT_SECRET === "production",
+      sameSite: "strict",
+      expires: new Date(0),
+    });
+
+    res.status(200).json({ message: "User logged out successfully" });
+  } catch (error) {
+    console.log(error.message);
+    next(error);
+  }
+});
+
 userRoute.get("/protected", verifyToken, (req, res) => {
   res.status(200).json({ message: "This is a protected route" });
 });
