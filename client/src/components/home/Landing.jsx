@@ -1,4 +1,5 @@
 import React from "react";
+import Featured from "./Featured";
 
 const Landing = () => {
   return (
@@ -16,6 +17,27 @@ const Landing = () => {
             </p>
           </div>
         </div>
+      </section>
+      <div className="bg-white stats stats-vertical lg:stats-horizontal shadow w-full flex rounded-none">
+        <div className="stat text-gray-700">
+          <div className="stat-title text-gray-700">Creations</div>
+          <div className="stat-value">12K</div>
+        </div>
+
+        <div className="stat text-gray-700">
+          <div className="stat-title text-gray-700">Members</div>
+          <div className="stat-value">1,200+</div>
+        </div>
+
+        <div className="stat text-gray-700">
+          <div className="stat-title text-gray-700 ">
+            Plastic waste collected
+          </div>
+          <div className="stat-value">31K</div>
+        </div>
+      </div>
+      <section className="align-elements mt-10">
+        <Featured />
       </section>
     </>
   );

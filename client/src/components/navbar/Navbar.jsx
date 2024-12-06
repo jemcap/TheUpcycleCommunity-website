@@ -22,7 +22,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <ul className="flex item-center gap-6 text-sm text-white">
               {NAVBAR_LINKS.map((link) => (
-                <li>
+                <li key={link.id}>
                   <a
                     href={link.href}
                     className="inline-block px-3 py-1 hover:text-green-700"
@@ -38,9 +38,9 @@ const Navbar = () => {
             <div className="flex items-center gap-6 text-white">
               <Link
                 to="/login"
-                className=" text-2xl rounded-lg px-3 py-1  font-semibold hover:bg-green-700 hover:text-white transition-all 2s ease"
+                className=" rounded-lg px-3 py-1  font-semibold hover:bg-green-700 hover:text-white transition-all 2s ease"
               >
-                <FaUser />
+                <h1>Start Contributing</h1>
               </Link>
             </div>
           </div>

@@ -28,6 +28,11 @@ const RegisterForm = () => {
           <FormInput label="username" type="text" name="username" />
           <FormInput label="email" type="email" name="email" />
           <FormInput label="password" type="password" name="password" />
+          <FormInput
+            label="confirm password"
+            type="password"
+            name="comfirm-password"
+          />
           <div className="flex flex-col items-center justify-center gap-2">
             <div className="w-full flex flex-col mt-5 justify-center items-center">
               <button
