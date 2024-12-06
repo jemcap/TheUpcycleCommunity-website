@@ -12,15 +12,15 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <nav className="z-10 relative top-0 left-0 w-full">
-        <div className="container mx-auto flex justify-between items-center">
+      <nav className="z-10 absolute top-0 left-0  w-full ">
+        <div className="align-elements container mx-auto flex justify-between items-center">
           {/* Logo */}
-          <div className="text-2xl flex items-center font-bold py-5">
+          <div className="text-2xl flex items-center text-white font-bold py-5">
             <h1>The Upcycle Community</h1>
           </div>
           {/* Menu */}
           <div className="hidden md:block">
-            <ul className="flex item-center gap-6 text-gray-600">
+            <ul className="flex item-center gap-6 text-sm text-white">
               {NAVBAR_LINKS.map((link) => (
                 <li>
                   <a
@@ -35,7 +35,7 @@ const Navbar = () => {
           </div>
           {/* Icons */}
           <div className="hidden md:block">
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 text-white">
               <Link
                 to="/login"
                 className=" text-2xl rounded-lg px-3 py-1  font-semibold hover:bg-green-700 hover:text-white transition-all 2s ease"
@@ -46,7 +46,7 @@ const Navbar = () => {
           </div>
           {/* Mobile hamburger menu */}
           <div
-            className="block md:hidden text-4xl font-bold cursor-pointer"
+            className="block md:hidden text-4xl font-bold cursor-pointer text-white"
             onClick={() => setOpen(!open)}
           >
             {open ? <AiOutlineClose /> : <RxHamburgerMenu />}
@@ -54,7 +54,7 @@ const Navbar = () => {
         </div>
       </nav>
       {/* // Mobile Sidebar */}
-      <div className="block md:hidden">
+      <div className="block md:hidden ">
         <Sidebar open={open} />
       </div>
     </>

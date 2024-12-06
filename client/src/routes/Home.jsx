@@ -3,7 +3,7 @@ import Landing from "../components/home/Landing";
 
 const Home = () => {
   return (
-    <section className="h-screen bg-gray-700">
+    <section className="h-screen w-screen">
       <Landing />
     </section>
   );

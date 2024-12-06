@@ -7,8 +7,8 @@ const Layout = () => {
     <>
       <div className="align-elements">
         <Navbar />
-        <Outlet />
       </div>
+      <Outlet />
     </>
   );
 };
