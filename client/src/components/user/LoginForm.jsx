@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import FormInput from "../input/FormInput";
 import { Link } from "react-router-dom";
+import { useLoginMutation } from "../../slices/usersApiSlice";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [login, { isLoading, error }] = useLoginMutation();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await login({ email, password }).unwrap();
+      console.log("Login successful", response);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section class="grid place-items-center h-screen">
       <div class="card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4 rounded-xl">
@@ -21,21 +40,42 @@ const LoginForm = () => {
             />
           </svg>
         </Link>
-        <form>
+        <form onSubmit={handleSubmit}>
           <h4 className="text-center text-3xl font-bold capitalize mb-5">
             login
           </h4>
-          <FormInput label="email" type="email" name="email" />
-          <FormInput label="password" type="password" name="password" />
+          <div>
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          {/* <FormInput label="email" type="email" name="email" />
+          <FormInput label="password" type="password" name="password" /> */}
           <div className="flex flex-col items-center justify-center gap-2">
             <div className="w-full flex flex-col mt-5 justify-center items-center">
               <button
                 class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Sign In
+                {isLoading ? "Logging in..." : "Login"}
               </button>
             </div>
+            {error && (
+              <p className="error">{error.data?.message || "Error occurred"}</p>
+            )}
 
             <a
               class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"

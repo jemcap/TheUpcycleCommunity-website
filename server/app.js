@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+import cors from "cors";
 
 import errorHandler from "./middleware/errorHandler.js";
 import userRoute from "./controllers/userController.js";
@@ -10,7 +11,9 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
+
 app.use(express.json());
+app.use(cors());
 app.use(cookieParser());
 
 connectDB();
