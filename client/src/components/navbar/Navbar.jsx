@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { NAVBAR_LINKS } from "../../utils/links";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -35,9 +36,12 @@ const Navbar = () => {
           {/* Icons */}
           <div className="hidden md:block">
             <div className="flex items-center gap-6">
-              <button className=" text-2xl rounded-lg px-3 py-1  font-semibold hover:bg-green-700 hover:text-white transition-all 2s ease">
+              <Link
+                to="/login"
+                className=" text-2xl rounded-lg px-3 py-1  font-semibold hover:bg-green-700 hover:text-white transition-all 2s ease"
+              >
                 <FaUser />
-              </button>
+              </Link>
             </div>
           </div>
           {/* Mobile hamburger menu */}
