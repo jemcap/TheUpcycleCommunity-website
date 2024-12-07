@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormInput = ({ label, type, name, defaultValue }) => {
+const FormInput = ({ label, type, name, defaultValue, handleChange }) => {
   return (
     <div className="my-5">
       <label
@@ -14,7 +14,8 @@ const FormInput = ({ label, type, name, defaultValue }) => {
         id={name}
         name={name}
         type={type}
-        defaultValue={defaultValue}
+        value={defaultValue}
+        onChange={handleChange}
       />
     </div>
   );
