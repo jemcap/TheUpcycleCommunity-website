@@ -6,7 +6,11 @@ mongoose.set("strictQuery", false);
 
 const userSchema = new Schema(
   {
-    username: String,
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+    },
     email: {
       type: String,
       unique: true,

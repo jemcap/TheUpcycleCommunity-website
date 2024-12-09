@@ -1,8 +1,45 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import FormInput from "../input/FormInput";
 import { Link } from "react-router-dom";
 
+import { useSelector, useDispatch } from "react-redux";
+import { useRegisterMutation } from "../../slices/usersApiSlice";
+import { setCredentials } from "../../slices/authSlice";
+
+import { useNavigate } from "react-router-dom";
+
 const RegisterForm = () => {
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [register, { isLoading, error }] = useRegisterMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      return alert("Passwords do not match");
+    }
+    try {
+      const response = await register({ email, username, password }).unwrap();
+      dispatch(setCredentials({ ...response }));
+      navigate("/login");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <section class="grid place-items-center h-screen">
       <div class="card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4 rounded-xl">
@@ -21,17 +58,37 @@ const RegisterForm = () => {
             />
           </svg>
         </Link>
-        <form>
+        <form onSubmit={handleSubmit}>
           <h4 className="text-center text-3xl font-bold capitalize mb-5">
             Register
           </h4>
-          <FormInput label="username" type="text" name="username" />
-          <FormInput label="email" type="email" name="email" />
-          <FormInput label="password" type="password" name="password" />
+          <FormInput
+            label="username"
+            type="text"
+            name="username"
+            defaultValue={username}
+            handleChange={(e) => setUserName(e.target.value)}
+          />
+          <FormInput
+            label="email"
+            type="email"
+            name="email"
+            defaultValue={email}
+            handleChange={(e) => setEmail(e.target.value)}
+          />
+          <FormInput
+            label="password"
+            type="password"
+            name="password"
+            defaultValue={password}
+            handleChange={(e) => setPassword(e.target.value)}
+          />
           <FormInput
             label="confirm password"
             type="password"
             name="comfirm-password"
+            defaultValue={confirmPassword}
+            handleChange={(e) => setConfirmPassword(e.target.value)}
           />
           <div className="flex flex-col items-center justify-center gap-2">
             <div className="w-full flex flex-col mt-5 justify-center items-center">

@@ -101,6 +101,57 @@ userRoute.post("/logout", (req, res, next) => {
   }
 });
 
+userRoute.get("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const response = await User.findById(id);
+    return res.status(200).json(response);
+  } catch (error) {
+    console.log(error.message);
+    next(error);
+  }
+});
+
+userRoute.put("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  const { username, email } = req.body;
+
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    user.username = username;
+    user.email = email;
+
+    const updatedUser = await user.save();
+
+    return res
+      .status(200)
+      .json({ message: "Profile updated", data: updatedUser });
+  } catch (error) {
+    console.log(error.message);
+    next(error);
+  }
+});
+
+userRoute.delete("/:id", async (req, res, next) => {
+  const { id } = req.params;
+
+  if (!id) return res.status(400).json({ error: "ID is required" });
+
+  try {
+    const response = await User.findByIdAndDelete(id);
+    return res
+      .status(200)
+      .json({ message: "Account deactivated", data: response });
+  } catch (error) {
+    console.log(error.message);
+    next(error);
+  }
+});
+
 userRoute.get("/protected", verifyToken, (req, res) => {
   res.status(200).json({ message: "This is a protected route" });
 });

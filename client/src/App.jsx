@@ -5,6 +5,7 @@ import About from "./routes/About";
 import Layout from "./components/Layout";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
+import Profile from "./routes/Profile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path=":id" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

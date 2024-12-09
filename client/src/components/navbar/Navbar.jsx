@@ -19,7 +19,7 @@ const Navbar = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
   console.log(userInfo);
-  const username = userInfo?.user?.username || "User";
+  const username = userInfo?.user?.username || userInfo?.username;
 
   const handleLogout = async () => {
     try {
