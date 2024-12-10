@@ -14,7 +14,7 @@ const Navlinks = () => {
   return (
     <nav
       aria-label="Main navigation"
-      className="flex flex-col gap-2 p-4 w-full max-w-xs"
+      className="hidden md:flex flex-col gap-2 p-4 w-full max-w-xs"
     >
       {links.map((link) => (
         <a

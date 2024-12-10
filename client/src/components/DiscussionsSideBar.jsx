@@ -16,7 +16,7 @@ const DiscussionsSideBar = () => {
   );
 
   return (
-    <aside className="w-full md:w-1/3 p-4">
+    <aside className="hidden md:block w-full md:w-1/3 p-4">
       {/* Search Bar */}
       <div className="mb-4">
         <input
